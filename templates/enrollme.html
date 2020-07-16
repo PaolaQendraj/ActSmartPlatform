@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCType html>
+<html>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Enroll Me</title>
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <body>
+        <!-- Header Area -->
+        <header class="header_area other">
+            {% include 'navbar.html' %}
+        </header>
+        <!-- End Of Header Area -->
+        
+        <!-- Enroll Me-->
+        <section class="parallex">
+           <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 info">
+                <ul id="scene">
+                    <li class="layer"><h2><mark>{{ content.line_one }}</mark></h2></li>
+                </ul>
+                <h3>{{ content.line_two }}</h3>
+                <h4 class="layer h4">{{ content.line_three }}</h4>
+                <ul class="include">
+                    {% for l in content_list %}
+                        <li>{{ l.item }}</li>
+                    {% endfor %}
+                </ul>
+                <div class="students">
+                    <h4>{{ content.line_four }}</h4>
+                    <h3 class="s1">{{ content.line_five }}</h3>
+                    <img class="s1" src="{{ content.images.url }}">
+                    <h6 class="s1">{{ content.line_six }}</h6>
+                </div>
+                <div class="container right">
+                    <h2>Hey You!</h2>
+                    <h4>You are almost there!</h4> <br>
+                    <div class="box">
+                        <div class="chart" data-percent="99">99%</div>
+                    </div>
+                    <a href="#">
+                        <span>Enroll Now</span>
+                        <div class="wave"></div>
+                    </a>
+                    <h4>To reach 100%!</h4>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 payment">
+                <h2><mark>{{ content.line_seven }}</mark></h2>
+                <div class="panel">
+                    <form action="/enroll/" method="post">
+                        {% csrf_token %}
+                        <div class="panel-heading"><h2>{{ content.line_eight }}</h2></div>
+                        <div class="panel-body">
+                            <input class="form-control" type="text" placeholder="Name" name="name" required>
+                            <input class="form-control" type="text" placeholder="Surname" name="surname" required>
+                            <input class="form-control" type="email" placeholder="Email" name="email" required>
+                            <input class="form-control" type="text" placeholder="Phone" name="phone" required>
+                            <input class="form-control" type="text" placeholder="Address" name="address" required>
+                            <input class="form-control" type="text" placeholder="City" name="city" required>
+                            <select class="form-control" name="country">
+                                {% for c in countries %}
+                                <option value="{{ c.name }}">{{ c.name }}</option>
+                                {% endfor %}
+                            </select><br>
+                            <div class="payment-type">
+                                <label>Choose payment type</label><br>
+                                <select class="form-control" name="payment">
+                                    <option value="PayPal">Paypal</option>
+                                    <option value="Pay at the office">Pay at the office</option>
+                                </select>
+                                <a id="pay" href="https://www.paypal.com/" target="_blank">Click Here to pay with
+                                    paypal</a>
+                            </div>
+                            <button class="btn" id="enroll">Enroll Now</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </section>
+        <section id="instagram">
+                <div class="row">
+                    <div class="col-sm-12 col-md-5 col-lg-5">
+                        <div class="pulse">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </div>
+                        <h1>Follow us<br> on instagram</h1>
+                        <h2><a href="{{ content.instagram_link }}" target="_blank" style="text-decoration: none; color: white">{{ content.instagram_account }}</a></h2>
+                    </div>
+                    <div class="col-sm-12 col-md-7 col-lg-7">
+                        <div class="owl-carousel owl-theme">
+                            {% for i in instagram reversed %}
+                                <div class="item">
+                                    <a href="{{ i.link }}" target="_blank"><img src={{ i.image.url }} class="img-fluid"></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <!-- Enroll Me-->
+
+        <!-- Modal -->
+        {% include 'modal.html' %}
+        <!--End Of Modal -->
+
+        <!-- Mentor -->
+        {% include 'mentor.html' %}
+        <!-- End Of Mentor -->
+
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        <!--End Of Footer -->
+
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/owl.carousel.js" %}"></script>
+        <script type="text/javascript">
+            $('.owl-carousel').owlCarousel({
+                loop:true,
+                margin:10,
+                responsive:{
+                    0:{
+                        items:2
+                    },
+                    425:{
+                        items:2
+                    },
+                    576:{
+                        items:3
+                    },
+                    767:{
+                        items:3
+                    },
+                    1000:{
+                        items:3
+                    }
+                }
+            })
+        </script>
+        {% include 'mentor_script.html' %}
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="{% static "js/jquery.easypiechart.js" %}"></script>
+        <script>
+            $(function() {
+                $('.chart').easyPieChart({
+                    //your options goes here
+                });
+            });
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+              $('#Register').modal('show');
+            });
+        </script>
+    </body>
+</html>

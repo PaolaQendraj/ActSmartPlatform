@@ -1,0 +1,164 @@
+<!DOCType html>
+{% load static %}
+<html>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Home</title>
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <style>
+        main .content .col2 a .wave:before{
+        content: '';
+        position: absolute;
+        top: -22px;
+        left: 0;
+        width: 100%;
+        height: 22px;
+        background: url(/ActSmart/static/images/wave.png);
+        animation: animate 0.5s linear infinite;
+        }
+    </style>
+    <body>
+        <!-- Header Area -->
+        <header class="header_area">
+            {% include 'navbar.html' %}
+        </header>
+        <!-- End Of Header Area -->
+        <!-- Linear Bg -->
+        <div class="linear-background">
+            <!-- Main -->
+            <main>
+                <div class="container content">
+                    <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <img src="{{ header.images.url }}" class="img-fluid">
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col2">
+                        <h6>{{ email_error }}</h6>
+                        <h2>{{ header.line_one }}</h2>
+                        <p>{{ header.line_two }}</p>
+                        <h6>{{ header.line_three }}</h6>
+                        <div class="box2">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <form method="post" action="/search/">
+                            {% csrf_token %}
+                            <div class="search">
+                                <input class="email-txt" type="text" name="tag" placeholder="Search here">
+                                <button class="email-btn">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="box">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </main>
+            <!-- End Of Main -->
+            
+            <!-- Services -->
+            <section id="services">
+                <h1>{{ services_content.line_one }}</h1>
+                <p>{{ services_content.line_two }}</p>
+                <h2>{{ services_content.line_three }}</h2>
+                <div class="container">
+                    <ul>
+                        {% for s in services %}
+                            <li>
+                                <a href="{{ s.link }}">
+                                    <div class="icon">
+                                        <i class="{{ s.icon }}"></i>
+                                    </div>
+                                </a>
+                                <div class="name">{{ s.name }}</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="wave wave1"></div>
+                <div class="wave wave2"></div>
+                <div class="wave wave3"></div>
+                <div class="wave wave4"></div>
+            </section>
+            <!-- End Of Services -->
+        </div>
+        <!-- End Of Linear Bg -->
+        
+        <!-- Opportunities Slider -->
+        <section id="club">
+            <div class="container">
+                <h1>Opportunities For You</h1>
+                <div class="row">
+                    <div class="owl-carousel owl-theme">
+                        {% for o in opportunity %}
+                            <div class="item">
+                                <div class="square">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <div class="content">
+                                        <h2><a href="{{ o.link }}" target="_blank">{{ o.name }}</a></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Of Opportunities Slider -->
+
+        <!-- Modal -->
+        {% include 'modal.html' %}
+        <!--End Of Modal -->
+
+        <!-- Mentor -->
+        {% include 'mentor.html' %}
+        <!-- End Of Mentor -->
+        
+        <!-- Footer -->
+        {% include 'footer.html' %}
+
+        <!--End Of Footer -->
+
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/owl.carousel.js" %}"></script>
+        <script type="text/javascript">
+            $('.owl-carousel').owlCarousel({
+                loop:false,
+                margin:10,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    550:{
+                        items:2
+                    },
+                    768:{
+                        items:3
+                    },
+                    800:{
+                        items:4
+                    },
+                    1000:{
+                        items:5
+                    }
+                }
+            })
+        </script>
+        {% include 'mentor_script.html' %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+              $('#Register').modal('show');
+            });
+        </script>
+    </body>
+</html>

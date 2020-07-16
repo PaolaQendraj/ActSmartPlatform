@@ -1,0 +1,36 @@
+ {% load static %}
+    <footer>
+            <h2>{{ footer.line_one }}</h2>
+            <p>{{ footer.line_two }}</p>
+            <form action="/subscriptions/" method="post">
+                {% csrf_token %}
+                <div class="subscribe">
+                    <input class="email-txt" type="email" name="email" placeholder="Type your email">
+                    <button class="email-btn">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </form>
+            <h4>Find us on social media</h4>
+            <div class="social">
+                <ul>
+                    <li><a href="{{ footer.link_facebook }}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="{{ footer.link_instagram }}" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="{{ footer.link_linkedin }}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    <li><a href="{{ footer.link_pinterest }}" target="_blank"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                    <li><a href="{{ footer.link_gmail}}" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div id="whatsapp">
+                <a href="https://api.whatsapp.com/send?phone={{ footer.phone }}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+            </div>
+            <div class="contact">
+                <ul>
+                    <li><a href="https://api.whatsapp.com/send?phone={{ footer.phone }}" target="_blank"><i class="fa fa-phone" aria-hidden="true"></i><span>Call us: </span><span id="data">{{ footer.phone }}</span><span id="line">|</span></a></li>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i><span>Find us: </span><span id="data">{{ footer.address }}</span><span id="line">|</span></li>
+                    <li><a href="mailto:{{ footer1.email }}?subject = Feedback&body = Message" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i><span>Mail us: </span><span id="data">{{ footer.email }}</span></a></li>
+                </ul>
+            </div>
+            <hr>
+            <h5>© Copyright 2020 by <a href="{{ footer.copyright_link }}" target="_blank">{{ footer.copyright_text }}</a></h5>
+        </footer>

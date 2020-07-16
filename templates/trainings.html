@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCType html>
+<html>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Trainings</title>
+    <body>
+        <!-- Header Area -->
+        <header class="header_area other">
+             {% include 'navbar.html' %}
+        </header>
+        <!-- End Of Header Area -->
+        
+        <!--Trainings-->
+        <section id="trainings">
+            <div class="container">
+                <img src="{% static "images/trainings.png" %}" class="img-fluid text">
+                <div class="row row1">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <h2>{{ training1.name }}</h2>
+                        <p>{{ training1.desctiption }}</p>
+                        <a href="#">
+                            <span>Register Here</span>
+                            <div class="wave"></div>
+                        </a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <img src={{ training1.images.url }}>
+                    </div>
+                </div>
+                 <div class="row row2">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <h2 id="mobile">{{ training2.name }}</h2><br>
+                        <p id="mobile">{{ training2.desctiption }}</p>
+                        <img src="{{ training2.images.url }}">
+                        <a href="#">
+                            <span>Register Here</span>
+                            <div class="wave"></div>
+                        </a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <h2>{{ training2.name }}</h2>
+                        <p>{{ training2.desctiption }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Of Trainings-->
+
+        <!-- Modal -->
+        {% include 'modal.html' %}
+        <!--End Of Modal -->
+
+        <!-- Mentor -->
+        {% include 'mentor.html' %}
+        <!-- End Of Mentor -->
+
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        <!--End Of Footer -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        {% include 'mentor_script.html' %}
+        <script>
+            $(document).ready(function() {
+              $('#Register').modal('show');
+            });
+        </script>
+    </body>
+</html>

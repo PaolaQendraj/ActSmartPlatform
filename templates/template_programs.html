@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCType html>
+<html>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Opportunity Information</title>
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <style>
+        .owl-theme .owl-nav.disabled+.owl-dots {margin-top: -35px;}
+    </style>
+    <body>
+        <!-- Header Area -->
+        <header class="header_area other">
+            {% include 'navbar.html' %}
+        </header>
+        <!-- End Of Header Area -->
+        
+        <!-- Item -->
+        <section id="template">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <div class="info">
+                            <div class="tags">
+                                {% for c in cat %}
+                                    <h5>{{ c }}</h5>
+                                {% endfor %}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                    <div class="icon-pulse">
+                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                    <h2>{{ program.title }}</h2>
+                                </div>
+                            </div>
+                            <img src={{ program.image_big.url }} class="img-fluid">
+                            <div class="important">
+                                <div class="icon-important">
+                                    <i class="fa fa-thumb-tack" aria-hidden="true"></i><span> Important Information</span>
+                                </div>
+                                <h3><span>Deadline:</span> <span>{{ program.deadline }}</span></h3>
+                                <h3><span>Location:</span> <span>{{ program.location }}</span></h3>
+                                <h4>Learning Objectives: <span></span></h4>
+                                <p>{{ program.objectives }}</p>
+                            </div>
+                            <div class="description">
+                                <h4>Description:</h4>
+                                <p>{{ program.description }}</p>
+                            </div>
+                            {% if program.founded == 'Y' %}
+                                <div class="founded">
+                                    <h4>Founded:</h4>
+                                    <ul>
+                                        {% for f in features %}
+                                            <li> {{ f }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <div class="not-founded">
+                                    <h4>Not-Founded</h4>
+                                </div>
+                            {% endif %}
+                            <div class="eligibility">
+                                <h4>Eligibility:</h4>
+                                <p>{{ program.eligibility }}</p>
+                            </div>
+                            <div class="link">
+                                <h6>For further information visit <a href="{{ program.official_link }}" target="_blank">the official link</a>.</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="container now">
+                            <p>Flash!</p>
+                            <h2>Trainings Happening Right Now!</h2>
+                            <div class="owl-carousel owl-theme">
+                                {%  for t in training %}
+                                    <div class="item">
+                                        <img src={{ t.images.url }} class="img-fluid">
+                                        <h6><a href="/trainings/" style="background-color: transparent; border:
+                                        none; padding: 0; width: 100%"><i
+                                                class="fa fa-hand-o-right"></i><span
+                                        >{{ t.name }}</span></a></h6>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <a href="/enroll/" target="_blank">
+                                <span>Enroll Now</span>
+                                <div class="wave"></div>
+                            </a>
+                            <p>Click here for more information!</p>
+                        </div>
+                        <div class="side-right">
+                            {% include 'register_form.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Item -->
+        
+        <!-- Mentor -->
+        {% include 'mentor.html' %}
+        <!-- End Of Mentor -->
+
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        <!--End Of Footer -->
+
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/owl.carousel.js" %}"></script>
+        <script type="text/javascript">
+            $('.owl-carousel').owlCarousel({
+                loop:false,
+                margin:10,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:1
+                    },
+                    1000:{
+                        items:1
+                    }
+                }
+            })
+        </script>
+        {% include 'mentor_script.html' %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    </body>
+</html>

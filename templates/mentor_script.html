@@ -1,0 +1,31 @@
+{% load static %}
+<script>
+            $(document).ready(function() {
+                $("#opp").change(function() {
+                    var val = $(this).val();
+                    if (val == "Bachelor") {
+                        $("#available").html("{% for s in scholarships%}{% if s.category.category == "Bachelor" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Master") {
+                        $("#available").html("{% for s in scholarships%}{% if s.category.category == "Master" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Phd") {
+                        $("#available").html("{% for s in scholarships%}{% if s.category.category == "PHD" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Fellowship") {
+                        $("#available").html("{% for s in scholarships%}{% if s.category.category == "Fellowship" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Trainings") {
+                        $("#available").html("{% for s in programs%}{% if s.category_two.name == "Trainings" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Conferences") {
+                        $("#available").html("{% for s in programs%}{% if s.category_two.name == "Conferences" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Jobs") {
+                        $("#available").html("{% for s in programs%}{% if s.category_two.name == "Jobs" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Internships") {
+                        $("#available").html("{% for s in programs%}{% if s.category_two.name == "Internships" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Grants") {
+                        $("#available").html("{% for s in programs%}{% if s.category_two.name == "Grants" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Contests") {
+                        $("#available").html("{% for s in programs%}{% if s.category_two.name == "Contests" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    } else if (val == "Volunteering") {
+                        $("#available").html("{% for s in programs%}{% if s.category_two.name == "Volunteering" %}<option value='{{ s.title }}' >{{ s.title }}</option>{% endif %}{% endfor %}");
+                    }
+                });
+            });
+        </script>
