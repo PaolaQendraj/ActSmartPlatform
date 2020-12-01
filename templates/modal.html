@@ -2,25 +2,27 @@
 <div id="Register" class="modal fade in" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
             <div class="modal-body">
                 <div id="space"></div>
                 <div class="row">
                     <div class="col-sm-12 col-md-7 col-lg-7">
                         <div class="text">
                             <h3>Subscribe to our newsletter</h3>
-                                <form action="/subscriptions/" method="post">
-                                    {% csrf_token %}
-                                    <input type="email" name="email" placeholder="Enter Your Email" required><br>
-                                    <button><i class="fa fa-envelope" aria-hidden="true"></i><span> &nbsp;Subscribe
-                                        Now</span></button>
-                                </form>
-                            </div>
+                            <form action="/subscriptions/" method="post">
+                                {% csrf_token %}
+                                <input type="email" name="email" placeholder="Enter Your Email" required><br>
+                                <button id="subscribe"><i class="fa fa-envelope" aria-hidden="true"></i><span>&nbsp Subscribe Now</span></button>
+                            </form>
                         </div>
+                    </div>
                         <div class="col-sm-12 col-md-5 col-lg-5">
                             <img src="{% static "images/mail_box.png" %}" class="img-fluid">
                         </div>
-                    </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>

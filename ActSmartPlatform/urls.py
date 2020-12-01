@@ -15,26 +15,41 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 
 from ActSmart import views
 from ActSmart.views import *
 from django.conf.urls.static import static
 
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('/', index),
     re_path(r'^$', views.index, name='index'),
-    path('scholarships/', scholarships),
-    path('programs/', programs),
-    path('trainings/', trainings),
-    path('enroll/', enroll),
-    path('call_mentor/', call_mentor),
+    # path('scholarships/', scholarships),
+    path('online_trainings/', online_trainings),
+    path('training_register/', training_register),
+    path('training_form/', training_form),
+    path('training_success/', training_success),
+    path('suggestions/', suggestions),
+    path('call_mentor_scholarship/', call_mentor_scholarship),
+    path('call_mentor_program/', call_mentor_program),
+    path('call_mentor_success/', call_mentor_success),
     path('information_scholarships/', template_scholarship),
     path('information_programs/', template_programs),
-    path('register/', register),
     path('subscriptions/', subscriptions),
-    path('search/', search),
-    path('<str:category>/', views.template_opp_scholarships),
-    path('<str:category>/', views.template_opp_programs)
+    path('scholarships/', someOpportunities),
+    path('programs/', somePrograms),
+    path('search_opportunities/', search_opportunities),
+    path('user_profile/', user_profile),
+    path('register/', register),
+    path('login/', login_user),
+    path('booking/', booking),
+    path('booking_sent/', booking_sent),
+    path('booking_success/', booking_success),
+    path('add_s/', add_s),
+    path('add_p/', add_p),
+    path('<str:kategori>/', template_opp),
+    path('accounts/', include('django.contrib.auth.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

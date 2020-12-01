@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Message</title>
+    <style>
+        a#more{
+            width: 75%;
+            margin-top: 15px;
+        }
+        a#more:hover{
+            width: 75%;
+            font-size: 14px;
+        }
+        h2{
+            text-align: center;
+        }
+        i{
+            color: var(--thm-accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Area -->
+        <header class="other">
+            {% include 'navbar.html' %}
+        </header>
+    <!-- End Of Header Area -->
+    <div class="banner-password">
+        <div class="content">
+            {% if request.get_full_path == '/booking_success/'  %}
+                <div class="panel">
+                    <div class="panel-heading"><h2><i class="fa fa-check-circle-o" aria-hidden="true"></i> Congrats!<br> You saved your spot!</h2></div>
+                    <div class="panel-body">
+                        <p id="text">
+                            Check your email for the <b>Zoom link!</b>
+                            We will be in contact very soon!
+                        </p>
+                        <a id="more">Go to Homepage</a>
+                    </div>
+                </div>
+                {% elif request.get_full_path == '/training_success/' %}
+                <div class="panel">
+                    <div class="panel-heading"><h2><i class="fa fa-graduation-cap" aria-hidden="true"></i> You saved your spot!</h2></div>
+                    <div class="panel-body">
+                        <p id="text">
+                            Thank you for registering in our Online Trainings. Check your <b>email</b> for more details.
+                        </p>
+                        <a id="more">Go to Homepage</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

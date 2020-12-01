@@ -1,0 +1,415 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 100px;
+    z-index: 1000;
+}
+header .logo{
+    position: relative;
+    font-size: 16px;
+    color: #5A0B2B;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+header .logo span{
+    color: #5A0B2B;
+}
+header .toggle{
+    max-width: 100%;
+    cursor: pointer;
+}
+.banner{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 100px;
+    background: var(--thm-accent2);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+.banner:before{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 530px;
+    height: 100%;
+    background: #5A0B2B;
+    transform-origin: top;
+    transform: skewX(-11deg);
+    z-index: 1;
+}
+.banner video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+    pointer-events: none;
+}
+.banner .textBox{
+    position: relative;
+    max-width: 600px;
+    z-index: 2;
+}
+.banner .textBox p{
+    color: #fff;
+    font-size: 1.1em;
+    margin: 5px 0 25px;
+}
+.banner .imgBox{
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    z-index: 2;
+}
+.banner .imgBox img{
+    position: absolute;
+    bottom: 175px;
+    height: 83%;
+    right: -20px;
+    z-index: 10000;
+}
+.banner.login .imgBox img{
+    bottom: 25px;
+}
+.banner .imgBox #ul1{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 62%;
+    left: 56.5%;
+    transform: translate(-50%,-50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px dotted #5a0b2b;
+    background-color: #f3e6e1;
+    animation: animateBorder linear 30s infinite;
+}
+.banner.login .imgBox #ul1 {
+    top: 87%;
+    width: 120px;
+    height: 120px;
+}
+.banner.login .imgBox #ul2{
+    top: 35%;
+}
+.banner .imgBox #ul2{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 13%;
+    left: 93.5%;
+    transform: translate(-50%,-50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px dotted #5a0b2b;
+    background-color: #f3e6e1;
+    animation: animateBorder linear 30s infinite;
+}
+@keyframes animateBorder{
+    0%{
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotate(360deg);
+    }
+}
+.banner .imgBox h2{
+    color: #fff;
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.33em;
+    position: absolute;
+    bottom: 40px;
+    margin-left: 20%;
+}
+.banner .imgBox h3{
+    color: #fff;
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.33em;
+    position: absolute;
+    top: -120px;
+    right: -35px;
+}
+.banner.login .imgBox h3{
+    top: 45px;
+}
+.sci{
+    position: absolute;
+    bottom: -42px;
+    letter-spacing: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    right: 135px;
+}
+.sci li{
+    list-style: none;
+    margin-left: 20px;
+    width: 50px;
+}
+.sci li a{
+    display: inline-block;
+    margin-right: 15px;
+}
+.sci li a i{
+    color: #fff;
+    font-size: 30px;
+    transform: .3s;
+}
+.sci li a i:hover{
+    font-size: 32px;
+}
+/*Form*/
+.banner form{
+    width: 430px;
+    margin-top: 115px;
+    margin-bottom: 100px;
+    margin-left: 45px;
+}
+.banner form.login{
+    margin-top: 30px;
+}
+.banner .textBox h2#login{
+    color: #5a0b2b;
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.33em;
+    margin-top: 120px;
+    margin-left: 50px;
+}
+.banner .textBox h2#payment{
+    color: #5a0b2b;
+    font-family: "Playfair Display", serif;
+    font-size: 27px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.33em;
+    margin-top: -150px;
+    margin-bottom: 30px;
+}
+.banner .panel
+{
+    margin-top: 30px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 15px 20px 8px rgba(0,0,0,0.1);
+    background-color:#FBFBFB;
+}
+.banner .panel .panel-heading 
+{
+    padding: 25px;
+    border-bottom: 1px solid #F3E6E1;
+}
+.banner .panel .panel-heading h2
+{
+    font-family: "Quicksand", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.banner .panel .panel-heading a{
+    cursor: pointer;
+}
+.banner .panel .panel-heading h3{
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #b4909f;
+    line-height: 3px;
+    letter-spacing: .5px;
+    margin-top: 10px;
+    text-decoration: underline;
+}
+.banner .panel-body
+{
+    padding: 30px 40px 40px 40px;
+}
+.banner .panel-body .form-control
+{
+    box-shadow: none;
+    border-radius: 4px;
+    border: 1px solid #F3E6E1;
+    background: #fff;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    width: 100%;
+}
+.banner .panel-body .form-control.address{
+    width: 100%;
+}
+.banner .panel-body input
+{
+    margin-top: 0;
+    margin-bottom: 15px;
+    outline: none;
+}
+.banner .panel-body input::placeholder
+{
+    font-size: 14px;
+    color: #748493;
+}
+.banner .panel-body .picture{
+    margin-top: 10px;
+}
+.banner .panel-body .picture input{
+    margin-top: 10px;
+    width: 100%;
+    font-size: 15px;
+}
+.banner .panel-body select
+{
+    font-size: 14px;
+    color: #748493;
+    width: 49%;
+}
+.banner .panel-body label.upload
+{
+    display: inline-block;
+    max-width: 100%;
+    padding-left: 2px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #556370;
+    font-size: 14px;
+}
+.banner .panel-body .picture span
+{
+    font-size: 13px;
+    font-weight: 400;
+    font-style: normal;
+    color: #556370;
+    line-height: 23px;
+    letter-spacing: .6px;
+}
+.banner .panel-body button{
+    margin: 25px auto 0 auto;
+    border: 2px solid #5a0b2b;
+    padding: 10px 30px;
+    background-color: #5a0b2b;
+    border-radius: 20px;
+    color: #fff;
+    display: block;
+    font-size: 15px;
+    outline: none;
+    font-weight: 600;
+    transition: .3s;
+}
+.banner .panel-body button:hover {
+    background-color: #fbfbfb;
+    color: #5a0b2b;
+    cursor: pointer;
+}
+.banner .panel-body label.terms
+{
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #556370;
+    line-height: 3px;
+    letter-spacing: .5px;
+    margin-top: 25px;
+}
+.banner .panel-body label.terms a:hover{
+    background-color: #f3e6e1;
+    cursor: pointer;
+}
+.banner.login .panel-body #forgot{
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #556370;
+    line-height: 3px;
+    letter-spacing: .5px;
+    margin-top: 20px;
+    text-align: center;
+    display: block;
+}
+.banner.login .panel-body #forgot a{
+    display: inline-block;
+    max-width: 100%;
+    padding-left: 2px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #556370;
+    font-size: 14px;
+    cursor: pointer;
+}
+h3#registration_error{
+    font-family: "Poppins", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0;
+    color: #5A0B2B;
+}
+/*Form*/
+/*Responsive*/
+@media (max-width:991px){
+    header{
+        padding: 20px 50px;
+    }
+    .banner{
+        padding: 150px 50px 0;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .banner:before{
+        width: 300px;
+        transform: skewX(-25deg) translateX(50%);
+    }
+    .banner .textBox{
+        max-width: 100%;
+    }
+    .sci{
+        z-index: 1000;
+        left: initial;
+        right: 20px;
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+
+

@@ -3,6 +3,18 @@
 <html>
     {% include 'head.html' %}
     <title>Act Smart &#9679; Trainings</title>
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <style>
+        .owl-theme .owl-nav {margin-top: 5px;}
+        .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {background: #353535;}
+        .owl-theme .owl-dots .owl-dot span {background: #dcd8d8;}
+        .col-right #training1{display: contents;}
+        .col-right #training2{display: none;}
+        @media (max-width: 1024px){
+            footer{margin-top: 40px;}
+        }
+    </style>
     <body>
         <!-- Header Area -->
         <header class="header_area other">
@@ -12,34 +24,110 @@
         
         <!--Trainings-->
         <section id="trainings">
-            <div class="container">
-                <img src="{% static "images/trainings.png" %}" class="img-fluid text">
-                <div class="row row1">
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <h2>{{ training1.name }}</h2>
-                        <p>{{ training1.desctiption }}</p>
-                        <a href="#">
-                            <span>Register Here</span>
-                            <div class="wave"></div>
-                        </a>
+            <div class="training-container">
+                <div class="col-left">
+                    <h3 data-aos="fade-right" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">Act Smart Trainings</h3>
+                    <h4 data-aos="fade-right" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300" data-aos-delay="200">Get trained from the best in town!</h4>
+                    <div class="trainings-now">
+                        <div class="owl-carousel owl-theme" data-aos="fade-right" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300" data-aos-delay="500">
+                            <div class="item" id="item1">
+                                <div class="imgBox">
+                                    <img class="img-fluid" src="{{ training1.small_image.url }}">
+                                </div>
+                            </div>
+                            <div class="item" id="item2">
+                                <div class="imgBox">
+                                    <img class="img-fluid" src="{{ training2.small_image.url }}">
+                                </div>
+                            </div>
+                            <div class="item" id="item2">
+                                <div class="imgBox">
+                                    <img class="img-fluid" src="{{ training2.small_image.url }}">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <img src={{ training1.images.url }}>
+                    <div class="suggest" data-aos="fade-right" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300" data-aos-delay="700">
+                        <form method="post" action="/suggestions/">
+                            {% csrf_token %}
+                            <label>What do you want to learn?</label><br>
+                            <input type="text" placeholder="Suggest a topic" name="topic" required>
+                            <button class="btn"><i class="fa fa-share" aria-hidden="true"></i>&nbsp;Share It</button>
+                        </form>
                     </div>
                 </div>
-                 <div class="row row2">
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <h2 id="mobile">{{ training2.name }}</h2><br>
-                        <p id="mobile">{{ training2.desctiption }}</p>
-                        <img src="{{ training2.images.url }}">
-                        <a href="#">
-                            <span>Register Here</span>
-                            <div class="wave"></div>
-                        </a>
+                <div class="col-right">
+                    <div class="col-content" id="training1">
+                        <div class="imgBox" data-aos="zoom-in" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">
+                            <img src="{{ training1.images.url }}" class="img-fluid">
+                        </div>
+                        <div class="features" data-aos="fade-left" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">
+                            <div class="f-box">
+                                <div class="top">
+                                    <div class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                                    <div class="text">
+                                        <h5>Hours</h5>
+                                        <h6>{{ training1.hours }} hours</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="f-box">
+                                <div class="top">
+                                    <div class="icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+                                    <div class="text">
+                                        <h5>Price</h5>
+                                        <h6>{{ training1.price }}€</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="f-box">
+                                <div class="top">
+                                    <div class="icon"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+                                    <div class="text">
+                                        <h5>Language</h5>
+                                        <h6>{{ training1.language }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p data-aos="fade-left" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">{{ training1.description }}</p>
+                        <a id="enroll" href="/training_register?id={{ training1.id }}" data-aos="fade-left" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">Register</a>
                     </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <h2>{{ training2.name }}</h2>
-                        <p>{{ training2.desctiption }}</p>
+                    <div class="col-content" id="training2">
+                        <div class="imgBox" data-aos="zoom-in" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">
+                            <img src="{{ training2.images.url }}" class="img-fluid">
+                        </div>
+                        <div class="features" data-aos="fade-left" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">
+                            <div class="f-box">
+                                <div class="top">
+                                    <div class="icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                                    <div class="text">
+                                        <h5>Hours</h5>
+                                        <h6>{{ training2.hours }} hours</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="f-box">
+                                <div class="top">
+                                    <div class="icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+                                    <div class="text">
+                                        <h5>Price</h5>
+                                        <h6>{{ training2.price }}€</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="f-box">
+                                <div class="top">
+                                    <div class="icon"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+                                    <div class="text">
+                                        <h5>Language</h5>
+                                        <h6>{{ training2.language }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p data-aos="fade-left" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">{{ training2.description }}</p>
+                        <a id="enroll" href="/training_register?id={{ training2.id }}" data-aos="fade-left" data-aos-easing="linear" data-aos-once = "true"  data-aos-duration="300">Register</a>
                     </div>
                 </div>
             </div>
@@ -50,20 +138,49 @@
         {% include 'modal.html' %}
         <!--End Of Modal -->
 
-        <!-- Mentor -->
-        {% include 'mentor.html' %}
-        <!-- End Of Mentor -->
-
-        <!-- Footer -->
-        {% include 'footer.html' %}
-        <!--End Of Footer -->
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        {% include 'mentor_script.html' %}
+        <!-- Scripts -->
+        {% include 'scripts.html' %}
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/owl.carousel.js" %}"></script>
+        <script type="text/javascript">
+            $('.owl-carousel').owlCarousel({
+                loop:false,
+                margin:10,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    550:{
+                        items:2
+                    },
+                    1000:{
+                        items:3
+                    }
+                }
+            })
+        </script>
         <script>
             $(document).ready(function() {
               $('#Register').modal('show');
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $("a#close").click(function(){
+                    $("#testimonial").hide(500);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $("#item2").click(function(){
+                    $(".col-right #training2").css({"display":"contents"});
+                    $(".col-right #training1").css({"display":"none"});
+                });
+                $("#item1").click(function(){
+                    $(".col-right #training1").css({"display":"contents"});
+                    $(".col-right #training2").css({"display":"none"});
+                });
             });
         </script>
     </body>

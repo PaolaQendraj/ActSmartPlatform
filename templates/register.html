@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCType html>
+<html>
+    <head>
+        {% include 'head.html' %}
+        <title>Act Smart &#9679; Register</title>
+        <style>
+            a.logo{
+                position: absolute;
+                top: 35px;
+                left: 155px;
+                font-size: 17px;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: var(--thm-base);
+                z-index: 999;
+            }
+            a.logo{
+                text-decoration: none;
+            }
+            a.logo span {
+                font-weight: 400;
+            }
+        </style>
+    </head>
+    <body>
+        <!--Register-->
+        <div class="banner register">
+            <a class="logo" href="/">Act<span>Smart</span></a>
+            <div class="textBox">
+                <form method="post" action="/register/">
+                    {% csrf_token %}
+                     <h3 id="registration_error">{{ pass_error }}</h3>
+                     <h3 id="registration_error">{{ email_error }}</h3>
+                    <div class="panel">
+                        <div class="panel-heading"><h2>Register Here</h2></div>
+                        <div class="panel-body">
+                            <input class="form-control" type="text" placeholder="Full Name" name="username" required>
+                            <input class="form-control" type="email" placeholder="Email Address" name="email" required>
+                            <input class="form-control" type="password" placeholder="Password" name="password" required>
+                            <input class="form-control" type="password" placeholder="Confirm Password" name="c_password" required>
+                            <input class="form-control" type="text" placeholder="Phone" name="phone" required>
+                            <select class="form-control" name="gender" required>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="O">Other</option>
+                            </select>
+                            <input class="form-control" type="text" placeholder="Country" name="Country" required>
+                            <input class="form-control" type="text" placeholder="City" name="city" required>
+                            <input class="form-control address" type="text" placeholder="Address" name="address" required>
+{#                            <div class="picture">#}
+{#                                <label class="upload">Upload your picture</label><span> (Only you can see it)</span><br>#}
+{#                                <input  class="form-control" type="file" id="myfile" name="image" style="margin-bottom:5px"><br>#}
+{#                                <br>#}
+{#                            </div>#}
+                            <label class="terms"><input type="checkbox" value="1" required>&nbsp;&nbsp;I have read and agree to the <a><b>terms and conditions.</b></a></label><br>
+                            <button class="btn" id="enroll">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="imgBox">
+                <ul id="ul1"></ul>
+                <img src="{% static "images/phone.png" %}">
+                <ul id="ul2"></ul>
+                <h5>Follow us in our social media!</h5>
+                <ul class="sci">
+                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <!--End Of Register-->
+    </body>
+</html>

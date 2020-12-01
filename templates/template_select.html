@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCType html>
+<html>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Opportunity</title>
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <style>
+        .owl-theme .owl-nav {
+            margin-top: 5px;
+        }
+        .owl-theme .owl-dots .owl-dot span {
+            width: 7px;
+            height: 7px;
+        }
+    </style>
+    <body>
+        <!-- Header Area -->
+        <header class="other">
+            {% include 'navbar.html' %}
+        </header>
+        <!-- End Of Header Area -->
+        
+        <!-- Opportunity -->
+        <section id="overview">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3">
+                                <div class="icon-pulse">
+                                    <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-11 col-md-11 col-sm-9 col-xs-9">
+                                <h2>{{ opportunitie }}</h2>
+                            </div>
+                        </div>
+                        <h4 id="browse">Region: {{ region }}</h4>
+                        <div class="opp-container">
+                        {% if scholarships or programs %}
+                            {% for s in scholarships %}
+                                {% if s.deadline >= today %}
+                                <div class="opp">
+                                    <div class="imgBx">
+                                        <a href="/information_scholarships?id={{ s.id}}"><img src={{ s.image_small.url }}></a>
+                                    </div>
+                                    <div class="content-visible">
+                                        <h4>{{ s.title }}</h4>
+                                        <hr>
+                                        <h5><span>Deadline:</span>{{ s.deadline }}</h5>
+                                        <h5><span>Location:</span>{{ s.location }}</h5>
+                                    </div>
+                                    <div class="content-hidden">
+                                        <a href="/information_scholarships?id={{ s.id }}"><h3>{{ s.small_description }}</h3></a>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <h2 style="text-transform: none">Don't worry! New opportunities are coming soon!</h2>
+                        {% endif %}
+                        {% if programs %}
+                            {% for s in programs %}
+                                {% if s.deadline >= today %}
+                                <div class="opp">
+                                    <div class="imgBx">
+                                        <a href="/information_scholarships?id={{ s.id}}"><img src={{ s.image_small.url }}></a>
+                                    </div>
+                                    <div class="content-visible">
+                                        <h4>{{ s.title }}</h4>
+                                        <hr>
+                                        <h5><span>Deadline:</span>{{ s.deadline }}</h5>
+                                        <h5><span>Location:</span>{{ s.location }}</h5>
+                                    </div>
+                                    <div class="content-hidden">
+                                        <a href="/information_scholarships?id={{ s.id }}"><h3>{{ s.small_description }}</h3></a>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    {% if scholarships or programs %}
+                        <div class="side-right">
+                            <div class="contact-form">
+                                <p>Need Some Extra Help?</p>
+                                <form action="/call_mentor_program/" method="post">
+                                    {% csrf_token %}
+                                    <h4>Call Your Mentor Now!</h4>
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            We offer the best opportunities for you!
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            Choose from the list the right opportunity for you!
+                                        </li>
+                                    </ul>
+                                    <label id="select">Opportunities</label><br>
+                                    <select id="opp" name="opp" required>
+                                        {% for p in program %}
+                                            <option value="{{ p.title }}">{{ p.title }}</option>
+                                        {% endfor %}
+                                    </select><br>
+                                    <button class="btn">Call Now</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                        <div class="container now">
+                            <p>Oops!</p>
+                            <h2>Trainings Happening Right Now!</h2>
+                            <div class="owl-carousel owl-theme">
+                                {%  for t in trainings %}
+                                    <div class="item">
+                                    <div class="img-Bx">
+                                        <a href="/trainings/"><img src={{ t.images.url }} class="img-fluid"></a>
+                                    </div>
+                                    <h6><a href="/trainings/" class="name"><i class="fa fa-hand-o-right"></i><span>{{ t.name }}</span></a></h6>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <p><a href="/trainings/" class="more">Click here to learn more!</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Opportunity -->
+
+        <!-- Footer -->
+        {% include 'footer.html' %}
+        <!--End Of Footer -->
+
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/owl.carousel.js" %}"></script>
+        <script type="text/javascript">
+            $('.owl-carousel').owlCarousel({
+                loop:false,
+                margin:10,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:1
+                    },
+                    1000:{
+                        items:1
+                    }
+                }
+            })
+        </script>
+
+        <!-- Scripts -->
+        {% include 'scripts.html' %}
+
+    </body>
+</html>

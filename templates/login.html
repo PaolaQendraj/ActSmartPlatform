@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCType html>
+<html>
+    <head>
+        {% include 'head.html' %}
+        <title>Act Smart &#9679; Login</title>
+    </head>
+    <body>
+        <!-- Header Area -->
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">Act<span>Smart</span></a>
+            </div>
+        </nav>
+        <!-- End Of Header Area -->
+
+        <!--Login-->
+        <div class="banner register login">
+            <div class="textBox">
+                <h2 id="login">Are you ready to change your life?</h2>
+                <form class="login" method="post" action="/login/">
+                    {% csrf_token %}
+                    <div class="panel">
+                        <div class="panel-heading"><h2>Login Here</h2></div>
+                        <div class="panel-body">
+                            <input class="form-control" type="text" placeholder="Username" name="username" required>
+                            <input class="form-control" type="password" placeholder="Password" name="password" required>
+                            <h4 id="account">You don't have an account?<a href="/register/">Click here</a></h4>
+                             <h4 id="forgot">Forgot your password?<a href="{% url 'password_reset' %}">Click here</a></h4>
+                            <button class="btn" id="enroll">Login</button>
+                        </div>
+                    </div>
+                </form>
+                <h5>Follow us in our social media!</h5>
+                <ul class="sci">
+                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div class="imgBox">
+                <ul id="ul1"></ul>
+                <img src="{% static "images/phone.png" %}">
+                <ul id="ul2"></ul>
+            </div>
+        </div>
+        <!--End Login-->
+    </body>
+</html>

@@ -4,14 +4,65 @@
     <head>
         {% include 'head.html' %}
         <title>Act Smart &#9679; Programs</title>
+        <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+        <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
     </head>
+    <style>
+        @media (max-width: 430px){
+        .opp-container .opp .content-hidden{margin-top:-50px;}
+        }
+        section#opp-main .cat-box {
+            background-color: var(--thm-accent2);
+            width: 100%;
+            border-radius: 6px;
+            margin-top: 10px;
+            padding: 30px 80px 0 80px;
+        }
+        .owl-theme .owl-nav{
+            margin-top: 0;
+        }
+        .owl-theme .owl-nav.disabled+.owl-dots {
+            margin-top: 5px;
+        }
+        .owl-theme .owl-dots .owl-dot span {
+            width: 9px;
+            height: 9px;
+        }
+        .programs .item{
+            width: 210px;
+            margin: 0 auto;
+        }
+        .programs .item a {
+            position: relative;
+            display: block;
+            padding: 14px 10px;
+            border: 1.5px solid white;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-decoration: none;
+            overflow: hidden;
+            font-family: Quicksand, sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            color: var(--thm-gray);
+            line-height: 1.27em;
+            text-align: center;
+            background-color: white;
+        }
+        .programs .item a.active {
+            background-color: var(--thm-gray);
+            color: #fff;
+        }
+    </style>
     <body>
         <!-- Header Area -->
-        <header class="header_area other">
+        <header class="other">
             {% include 'navbar.html' %}
         </header>
         <!-- End Of Header Area -->
-        
+
         <!-- Scholarship Corner -->
         <section id="opp-main">
             <div class="container">
@@ -29,142 +80,118 @@
                 </div>
                 <div class="row">
                     <div class="cat-box programs">
-                        <ul>
-                            <li>
-                                <a href="#trainings" id="mobile" >
-                                    <span>Trainings &amp; Conferences</span>
+                        <div class="owl-carousel owl-theme" data-aos="zoom-in-down" data-aos-easing="linear" data-aos-once = "true">
+                            <div class="item">
+                                <a href="/programs?id=Trainings" id="desktop" class="first {% if request.get_full_path == '/programs/?id=Trainings' %}active{% endif %}">
+                                    <span>Trainings</span>
                                     <div class="wave"></div>
                                 </a>
-                                <a href="/Trainings & Conferences" id="desktop" class="first" target="_blank">
-                                    <span>Trainings &amp; Conferences</span>
+                            </div>
+                            <div class="item">
+                                <a href="/programs?id=Conferences" id="desktop" class="first {% if request.get_full_path == '/programs/?id=Conferences'  %}active{% endif %}">
+                                    <span>Conferences</span>
                                     <div class="wave"></div>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="#internships" id="mobile">
-                                    <span>Jobs &amp; Internships</span>
+                            </div>
+                            <div class="item">
+                                <a href="/programs?id=Jobs" id="mobile" class="{% if request.get_full_path == '/programs/?id=Jobs'  %}active{% endif %}">
+                                    <span>Jobs</span>
                                     <div class="wave"></div>
                                 </a>
-                                <a href="/Jobs & Internships" id="desktop" target="_blank">
-                                    <span>Jobs &amp; Internships</span>
+                            </div>
+                            <div class="item">
+                                <a href="/programs?id=Internships" id="mobile" class="{% if request.get_full_path == '/programs/?id=Internships'  %}active{% endif %}">
+                                    <span>Internships</span>
                                     <div class="wave"></div>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="#grants" id="mobile">
-                                    <span>Contests &amp; Grants</span>
+                            </div>
+                            <div class="item">
+                                <a href="/programs?id=Contests" id="desktop" class="{% if request.get_full_path == '/programs/?id=Contests'  %}active{% endif %}">
+                                    <span>Contests</span>
                                     <div class="wave"></div>
                                 </a>
-                                <a href="/Contests & Grants" id="desktop" target="_blank">
-                                    <span>Contests &amp; Grants</span>
+                            </div>
+                            <div class="item">
+                                <a href="/programs?id=Grants" id="desktop" class="{% if request.get_full_path == '/programs/?id=Grants'  %}active{% endif %}">
+                                    <span>Grants</span>
                                     <div class="wave"></div>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="#volunteering" id="mobile">
+                            </div>
+                            <div class="item">
+                                <a href="/programs?id=Volunteering" id="desktop" class="{% if request.get_full_path == '/programs/?id=Volunteering'  %}active{% endif %}">
                                     <span>Volunteering</span>
                                     <div class="wave"></div>
                                 </a>
-                                <a href="/Volunteering" id="desktop" target="_blank">
-                                    <span>Volunteering</span>
-                                    <div class="wave"></div>
-                                </a>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="opp-container">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                <h3 class="mobile" id="trainings">Trainings &amp; Conferences</h3>
-                                {% for t in training|slice:"3" %}
-                                    {% if t.deadline >= today %}
-                                    <div class="opp">
-                                        <div class="imgBx">
-                                            <a href="/information_programs?id={{ t.id }}"><img src={{ t.image_small.url }}></a>
-                                        </div>
-                                        <div class="content-visible">
-                                            <h4>{{ t.title }}</h4>
-                                            <hr>
-                                            <h5><span>Deadline:</span>{{ t.deadline }}</h5>
-                                            <h5><span>Location:</span>{{ t.location }}</h5>
-                                        </div>
-                                        <div class="content-hidden">
-                                            <a href=""><h3>{{ t.small_description }}</h3></a>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                {% endfor %}
-                                <a id="more" href="/Trainings & Conferences" target="_blank">See More</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                <h3 class="mobile" id="internships">Jobs &amp; Internships</h3>
-                                {% for t in jobs|slice:"3" %}
-                                    {% if t.deadline >= today %}
-                                    <div class="opp">
-                                        <div class="imgBx">
-                                            <a href="/information_programs?id={{ t.id }}"><img src={{ t.image_small.url }}></a>
-                                        </div>
-                                        <div class="content-visible">
-                                            <h4>{{ t.title }}</h4>
-                                            <hr>
-                                            <h5><span>Deadline:</span>{{ t.deadline }}</h5>
-                                            <h5><span>Location:</span>{{ t.location }}</h5>
-                                        </div>
-                                        <div class="content-hidden">
-                                            <a href=""><h3>{{ t.small_description }}</h3></a>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                {% endfor %}
-                                <a id="more" href="/Jobs & Internships" target="_blank">See More</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                <h3 class="mobile" id="grants">Contests &amp; Grants</h3>
-                                    {% for t in contests|slice:"3" %}
-                                        {% if f.deadline >= today %}
+                            {% if user.is_authenticated %}
+                                {% for p in program|slice:"8" %}
+                                    {% if p.deadline >= today %}
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                             <div class="opp">
                                                 <div class="imgBx">
-                                                    <a href="/information_programs?id={{ t.id }}"><img src={{ t.image_small.url }}></a>
+                                                    <a href="/information_programs?id={{ p.id }}" target="_blank"><img src={{ p.image_small.url }}></a>
                                                 </div>
                                                 <div class="content-visible">
-                                                    <h4>{{ t.title }}</h4>
+                                                    <h4>{{ p.title }}</h4>
                                                     <hr>
-                                                    <h5><span>Deadline:</span>{{ t.deadline }}</h5>
-                                                    <h5><span>Location:</span>{{ t.location }}</h5>
+                                                    <h5><span>Deadline:</span>{{ p.deadline }}</h5>
+                                                    <h5><span>Location:</span>{{ p.location }}</h5>
                                                 </div>
                                                 <div class="content-hidden">
-                                                    <a href=""><h3>{{ t.small_description }}</h3></a>
+                                                    <a href="/information_programs?id={{ p.id }}" target="_blank"><h3>{{ p.small_description }}</h3></a>
                                                 </div>
                                             </div>
-                                        {% endif %}
-                                {% endfor %}
-                                <a id="more" href="/Contests & Grants" target="_blank">See More</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                <h3 class="mobile" id="volunteering">Volunteering</h3>
-                                {% for t in volunteering|slice:"3" %}
-                                    {% if t.deadline >= today %}
-                                    <div class="opp">
-                                        <div class="imgBx">
-                                            <a href="/information_programs?id={{ t.id }}"><img src={{ t.image_small.url }}></a>
                                         </div>
-                                        <div class="content-visible">
-                                            <h4>{{ t.title }}</h4>
-                                            <hr>
-                                            <h5><span>Deadline:</span>{{ t.deadline }}</h5>
-                                            <h5><span>Location:</span>{{ t.location }}</h5>
-                                        </div>
-                                        <div class="content-hidden">
-                                            <a href=""><h3>{{ t.small_description }}</h3></a>
-                                        </div>
-                                    </div>
                                     {% endif %}
                                 {% endfor %}
-                                <a id="more" href="/Volunteering" target="_blank">See More</a>
-                            </div>
+                            {% else %}
+                            {% for p in program|slice:"4" %}
+                                {% if p.deadline >= today %}
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                        <div class="opp">
+                                            <div class="imgBx">
+                                                <a href="/login/" target="_blank"><img src={{ p.image_small.url }}></a>
+                                            </div>
+                                            <div class="content-visible">
+                                                <h4>{{ p.title }}</h4>
+                                                <hr>
+                                                <h5><span>Deadline:</span>{{ p.deadline }}</h5>
+                                                <h5><span>Location:</span>{{ p.location }}</h5>
+                                            </div>
+                                            <div class="content-hidden">
+                                                <a href="/login/" target="_blank"><h3>{{ p.small_description }}</h3></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                         </div>
+                        {% if user.is_authenticated %}
+                            {% if opportunite == 'Trainings' %}
+                                <a id="more" href="/Trainings">See More</a>
+                                {% elif opportunite == 'Conferences'  %}
+                                <a id="more" href="/Conferences">See More</a>
+                                {% elif opportunite == 'Jobs'  %}
+                                <a id="more" href="/Jobs">See More</a>
+                                {% elif opportunite == 'Internships'  %}
+                                <a id="more" href="/Internships">See More</a>
+                                {% elif opportunite == 'Contests'  %}
+                                <a id="more" href="/Contests">See More</a>
+                                {% elif opportunite == 'Grants'  %}
+                                <a id="more" href="/Grants">See More</a>
+                                {% elif opportunite == 'Volunteering'  %}
+                                <a id="more" href="/Volunteering">See More</a>
+                            {% endif %}
+                            {% else %}
+                            <a id="more" href="/login">See More</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -175,21 +202,45 @@
         {% include 'modal.html' %}
         <!--End Of Modal -->
 
-        <!-- Mentor -->
-        {% include 'mentor.html' %}
-        <!-- End Of Mentor -->
-
         <!-- Footer -->
         {% include 'footer.html' %}
         <!--End Of Footer -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        {% include 'mentor_script.html' %}
+        <!-- Scripts -->
+        {% include 'scripts.html' %}
+
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/owl.carousel.js" %}"></script>
+        <script type="text/javascript">
+            $('.owl-carousel').owlCarousel({
+                loop:false,
+                margin:10,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    550:{
+                        items:3
+                    },
+                    768:{
+                        items:3
+                    },
+                    800:{
+                        items:4
+                    },
+                    1000:{
+                        items:4
+                    }
+                }
+            })
+        </script>
+
         <script>
             $(document).ready(function() {
               $('#Register').modal('show');
             });
         </script>
+        <!--/ Scripts -->
+
     </body>
 </html>

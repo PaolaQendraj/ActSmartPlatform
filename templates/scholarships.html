@@ -7,11 +7,11 @@
     </head>
     <body>
         <!-- Header Area -->
-        <header class="header_area other">
+        <header class="other">
             {% include 'navbar.html' %}
         </header>
         <!-- End Of Header Area -->
-        
+
         <!-- Scholarship Corner -->
         <section id="opp-main">
             <div class="container">
@@ -31,43 +31,43 @@
                     <div class="cat-box">
                         <ul>
                             <li>
-                                <a href="#php" id="mobile">
-                                    <span>PHD</span>
-                                    <div class="wave"></div>
+                                <a href="/scholarships?id=Bachelor" id="mobile" class="{% if request.get_full_path == '/scholarships/?id=Bachelor'  %}active{% endif %}">
+                                    <span>Bachelor</span>
+{#                                    <div class="wave"></div>#}
                                 </a>
-                                <a href="/PHD" id="desktop" target="_blank">
-                                    <span>PHD</span>
-                                    <div class="wave"></div>
+                                 <a href="/scholarships?id=Bachelor" id="desktop" class="{% if request.get_full_path == '/scholarships/?id=Bachelor'  %}active{% endif %}">
+                                    <span>Bachelor</span>
+{#                                    <div class="wave"></div>#}
                                 </a>
                             </li>
                             <li>
-                                <a href="#master" id="mobile">
+                                <a href="/scholarships?id=Master" id="mobile" class="{% if request.get_full_path == '/scholarships/?id=Master'  %}active{% endif %}">
                                     <span>Master</span>
                                     <div class="wave"></div>
                                 </a>
-                                 <a href="/Master" id="desktop" target="_blank">
+                                 <a href="/scholarships?id=Master" id="desktop" class="{% if request.get_full_path == '/scholarships/?id=Master'  %}active{% endif %}">
                                     <span>Master</span>
-                                    <div class="wave"></div>
+{#                                   <div class="wave"></div>#}
                                 </a>
                             </li>
                             <li>
-                                <a href="#bachelor" id="mobile">
-                                    <span>Bachelor</span>
-                                    <div class="wave"></div>
+                                <a href="/scholarships?id=PhD" id="mobile" class="{% if request.get_full_path == '/scholarships/?id=PhD'  %}active{% endif %}">
+                                    <span style="text-transform: none">PhD</span>
+{#                                    <div class="wave"></div>#}
                                 </a>
-                                 <a href="/Bachelor" id="desktop" target="_blank">
-                                    <span>Bachelor</span>
-                                    <div class="wave"></div>
+                                <a href="/scholarships?id=PhD" id="desktop" class="{% if request.get_full_path == '/scholarships/?id=PhD'  %}active{% endif %}">
+                                    <span style="text-transform: none">PhD</span>
+{#                                    <div class="wave"></div>#}
                                 </a>
                             </li>
                             <li>
-                                <a href="#fellowship" id="mobile">
+                                <a href="/scholarships?id=Fellowship" id="mobile" class="{% if request.get_full_path == '/scholarships/?id=Fellowship'  %}active{% endif %}">
                                     <span>Fellowship</span>
-                                    <div class="wave"></div>
+{#                                    <div class="wave"></div>#}
                                 </a>
-                                <a href="/Fellowship" id="desktop" target="_blank">
+                                <a href="/scholarships?id=Fellowship" id="desktop" class="{% if request.get_full_path == '/scholarships/?id=Fellowship'  %}active{% endif %}">
                                     <span>Fellowship</span>
-                                    <div class="wave"></div>
+{#                                    <div class="wave"></div>#}
                                 </a>
                             </li>
                         </ul>
@@ -76,95 +76,73 @@
                 <div class="row">
                     <div class="opp-container">
                         <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <h3 class="mobile" id="php">PHP</h3>
-                                {% for p in phd|slice:"3" %}
+                            {% if request.get_full_path == '/scholarships/?id=PhD'  %}
+                                <h3 class="mobile">PhD</h3>
+                            {% elif request.get_full_path == '/scholarships/?id=Master' %}
+                                <h3 class="mobile">Master</h3>
+                            {% elif request.get_full_path == '/scholarships/?id=Bachelor' %}
+                                <h3 class="mobile">Bachelor</h3>
+                            {% elif request.get_full_path == '/scholarships/?id=Fellowship' %}
+                                <h3 class="mobile">Fellowship</h3>
+                            {% endif %}
+
+                            {% if user.is_authenticated %}
+                                {% for p in scholarship|slice:"8" %}
                                     {% if p.deadline >= today %}
-                                    <div class="opp">
-                                        <div class="imgBx">
-                                            <a href="/information_scholarships?id={{ p.id }}" target="_blank"><img src={{ p.image_small.url }}></a>
-                                        </div>
-                                        <div class="content-visible">
-                                            <h4>{{ p.title }}</h4>
-                                            <hr>
-                                            <h5><span>Deadline:</span>{{ p.deadline }}</h5>
-                                            <h5><span>Location:</span>{{ p.location }}</h5>
-                                        </div>
-                                        <div class="content-hidden">
-                                            <a href="/information_scholarships?id={{ p.id }}" target="_blank"><h3>{{ p.small_description }}</h3></a>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                {% endfor %}
-                                <a id="more" href="/PHP" target="_blank">See More</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <h3 class="mobile" id="master">MASTER</h3>
-                                {% for m in master|slice:"3" %}
-                                    {% if m.deadline >= today %}
-                                    <div class="opp">
-                                        <div class="imgBx">
-                                            <a href="/information_scholarships?id={{ m.id }}" target="_blank"><img src={{ m.image_small.url }}></a>
-                                        </div>
-                                        <div class="content-visible">
-                                            <h4>{{ m.title }}</h4>
-                                            <hr>
-                                            <h5><span>Deadline:</span>{{ m.deadline }}</h5>
-                                            <h5><span>Location:</span>{{ m.location }}</h5>
-                                        </div>
-                                        <div class="content-hidden">
-                                            <a href="/information_scholarships?id={{ m.id }}" target="_blank"><h3>{{ m.small_description }}</h3></a>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                {% endfor %}
-                                <a id="more" href="/Master" target="_blank">See More</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <h3 class="mobile" id="bachelor">Bachelor</h3>
-                                {% for b in bachelor|slice:"3" %}
-                                    {% if b.deadline >= today %}
-                                        <div class="opp">
-                                            <div class="imgBx">
-                                                <a href="/information_scholarships?id={{ b.id }}" target="_blank"><img src={{ b.image_small.url }}></a>
-                                            </div>
-                                            <div class="content-visible">
-                                                <h4>{{ b.title }}</h4>
-                                                <hr>
-                                                <h5><span>Deadline:</span>{{ b.deadline }}</h5>
-                                                <h5><span>Location:</span>{{ b.location }}</h5>
-                                            </div>
-                                            <div class="content-hidden">
-                                                <a href="/information_scholarships?id={{ b.id }}" target="_blank"><h3>{{ b.small_description }}</h3></a>
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="opp">
+                                                <div class="imgBx">
+                                                    <a href="/information_scholarships?id={{ p.id }}" target="_blank"><img src={{ p.image_small.url }}></a>
+                                                </div>
+                                                <div class="content-visible">
+                                                    <h4>{{ p.title }}</h4>
+                                                    <hr>
+                                                    <h5><span>Deadline:</span>&nbsp;{{ p.deadline }}</h5>
+                                                    <h5><span>Location:</span>&nbsp;{{ p.location }}</h5>
+                                                </div>
+                                                <div class="content-hidden">
+                                                    <a href="/information_scholarships?id={{ p.id }}" target="_blank"><h3>{{ p.small_description }}</h3></a>
+                                                </div>
                                             </div>
                                         </div>
                                     {% endif %}
                                 {% endfor %}
-                                <a id="more" href="/Bachelor" target="_blank">See More</a>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                <h3 class="mobile" id="fellowship">Fellowship</h3>
-                                {% for f in fellowship|slice:"3" %}
-                                    {% if f.deadline >= today %}
-                                    <div class="opp">
-                                        <div class="imgBx">
-                                            <a href="/information_scholarships?id={{ f.id }}" target="_blank"><img src={{ f.image_small.url }}></a>
+                            {% else %}
+                                {% for p in scholarship|slice:"4" %}
+                                    {% if p.deadline >= today %}
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="opp">
+                                                <div class="imgBx">
+                                                    <a href="/login/" target="_blank"><img src={{ p.image_small.url }}></a>
+                                                </div>
+                                                <div class="content-visible">
+                                                    <h4>{{ p.title }}</h4>
+                                                    <hr>
+                                                    <h5><span>Deadline:</span>&nbsp;{{ p.deadline }}</h5>
+                                                    <h5><span>Location:</span>&nbsp;{{ p.location }}</h5>
+                                                </div>
+                                                <div class="content-hidden">
+                                                    <a href="/login/" target="_blank"><h3>{{ p.small_description }}</h3></a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="content-visible">
-                                            <h4>{{ f.title }}</h4>
-                                            <hr>
-                                            <h5><span>Deadline:</span>{{ f.deadline }}</h5>
-                                            <h5><span>Location:</span>{{ f.location }}</h5>
-                                        </div>
-                                        <div class="content-hidden">
-                                            <a href="/information_scholarships?id={{ f.id }}" target="_blank"><h3>{{ f.small_description }}</h3></a>
-                                        </div>
-                                    </div>
                                     {% endif %}
                                 {% endfor %}
-                                <a id="more" href="/Fellowship" target="_blank">See More</a>
-                            </div>
+                            {% endif %}
                         </div>
+                        {% if user.is_authenticated %}
+                            {% if opportunite == 'PhD' %}
+                                <a id="more" href="/PhD">See More</a>
+                                {% elif opportunite == 'Master'  %}
+                                <a id="more" href="/Master">See More</a>
+                                {% elif opportunite == 'Bachelor'  %}
+                                <a id="more" href="/Bachelor">See More</a>
+                                {% elif opportunite == 'Fellowship'  %}
+                                <a id="more" href="/Fellowship">See More</a>
+                            {% endif %}
+                            {% else %}
+                            <a id="more" href="/login">See More</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -175,21 +153,18 @@
         {% include 'modal.html' %}
         <!--End Of Modal -->
 
-        <!-- Mentor -->
-        {% include 'mentor.html' %}
-        <!-- End Of Mentor -->
-        
         <!-- Footer -->
         {% include 'footer.html' %}
         <!--End Of Footer -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        {% include 'mentor_script.html' %}
+        <!-- Scripts -->
+        {% include 'scripts.html' %}
+
         <script>
             $(document).ready(function() {
               $('#Register').modal('show');
             });
         </script>
+
     </body>
 </html>

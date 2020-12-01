@@ -1,22 +1,10 @@
+from datetime import timedelta
+
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Index_Header(models.Model):
-    line_one = models.CharField(max_length=50)
-    line_two = models.CharField(max_length=150)
-    line_three = models.CharField(max_length=100)
-    images = models.ImageField(upload_to='media', null=True, blank=True)
-
-    def __str__(self):
-        return 'Content'
-
-class Services_Content(models.Model):
-    line_one = models.CharField(max_length=50)
-    line_two = models.CharField(max_length=300)
-    line_three = models.CharField(max_length=100)
-
-    def __str__(self):
-        return 'Content'
+from django.utils.datetime_safe import datetime
 
 class Services_Item(models.Model):
     name = models.CharField(max_length=20)
@@ -33,51 +21,45 @@ class Opportunitie(models.Model):
     def __str__(self):
         return self.name
 
-class Mentor_Content(models.Model):
-    line_one = models.CharField(max_length=100)
-    line_two = models.CharField(max_length=50)
-    line_three = models.CharField(max_length=300)
-
-    def __str__(self):
-        return 'Content'
-
-class Mentor_Features(models.Model):
-    feature = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.feature
-
-class Trainings_Page(models.Model):
+class Training(models.Model):
     name = models.CharField(max_length=100)
-    desctiption = models.CharField(max_length=500)
+    hours = models.CharField(max_length=30, default='')
+    price = models.FloatField(null=True, blank=True)
+    language = models.CharField(max_length=30, default='')
+    description = models.TextField(default='')
     images = models.ImageField(upload_to='media')
+    small_image = models.ImageField(upload_to='media', null=True)
+    YES = 'Y'
+    NO = 'N'
+    TYPE_CHOICES = [
+        (YES, 'Yes'),
+        (NO, 'No'),
+    ]
+    available = models.CharField(
+        max_length=2,
+        choices=TYPE_CHOICES,
+        default=NO
+    )
     deadline = models.DateField()
 
     def __str__(self):
         return self.name
 
-class Enroll_Page(models.Model):
-    line_one = models.CharField(max_length=60)
-    line_two = models.CharField(max_length=100)
-    line_three = models.CharField(max_length=100)
-    line_four = models.CharField(max_length=100)
-    line_five = models.CharField(max_length=100)
-    images = models.ImageField(upload_to='media')
-    line_six = models.CharField(max_length=250)
-    line_seven = models.CharField(max_length=250, default='', blank=True, null=True)
-    line_eight = models.CharField(max_length=250, default='', blank=True, null=True)
-    instagram_account = models.CharField(max_length=20)
-    instagram_link = models.CharField(max_length=50, default='')
+class Topic_Suggestions(models.Model):
+    topic = models.TextField()
 
     def __str__(self):
-        return 'Content'
+        return self.topic
 
-
-class Enroll_Content_List(models.Model):
-    item = models.CharField(max_length=120)
+class Training_Registration(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=50)
+    phone = models.CharField(max_length=20, default='')
+    training = models.ForeignKey(Training, on_delete=models.CASCADE, null=True, blank=True)
+    date_register = models.DateField(default=datetime.now, blank=True)
 
     def __str__(self):
-        return self.item
+        return self.name + self.training.name
 
 class Instagram(models.Model):
     image = models.ImageField(upload_to='media')
@@ -124,7 +106,6 @@ class Scholarship_Opportunitie(models.Model):
 class Program_Opportunitie(models.Model):
     title = models.CharField(max_length=170)
     category = models.ForeignKey(Opportunities_Category, on_delete=models.CASCADE, null=True, blank=True)
-    category_two = models.ForeignKey(Opportunitie, on_delete=models.CASCADE, null=True, blank=True)
     image_big = models.ImageField(upload_to='media')
     image_small = models.ImageField(upload_to='media', null=True)
     deadline = models.DateField()
@@ -151,6 +132,14 @@ class Program_Opportunitie(models.Model):
     def __str__(self):
         return self.title
 
+class Opportunity_Category_Region(models.Model):
+    category = models.ForeignKey(Opportunitie, on_delete=models.CASCADE, null=True, blank=True)
+    region = models.CharField(max_length=50, default='')
+
+    def __str__(self):
+        return self.category.name +  ' - ' + self.region
+
+
 class Footer(models.Model):
     line_one = models.CharField(max_length=100)
     line_two = models.CharField(max_length=100)
@@ -158,7 +147,6 @@ class Footer(models.Model):
     link_instagram = models.CharField(max_length=70)
     link_linkedin = models.CharField(max_length=70)
     link_pinterest = models.CharField(max_length=70)
-    link_gmail = models.CharField(max_length=70)
     phone = models.CharField(max_length=20)
     address = models.CharField(max_length=50)
     email = models.CharField(max_length=40)
@@ -170,46 +158,15 @@ class Footer(models.Model):
 
 
 class Call_Mentor(models.Model):
-    full_name = models.CharField(max_length=50)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default='')
     email = models.EmailField(max_length=50)
     phone = models.CharField(max_length=50)
+    date_register = models.DateField(default=datetime.now, blank=True)
+    opportunity_category = models.CharField(max_length=50, default='')
     opportunity_name = models.CharField(max_length=50)
-    opportunity_selected = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.full_name
-
-
-class Countrie(models.Model):
-    name = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.name
-
-
-class Trainings_Registration(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
-    phone = models.CharField(max_length=50)
-    gender = models.CharField(max_length=20)
-    country = models.CharField(max_length=20)
-    training = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.name
-
-class Enrolled(models.Model):
-    name = models.CharField(max_length=30)
-    surname = models.CharField(max_length=30)
-    email = models.EmailField(max_length=50)
-    phone = models.CharField(max_length=20, default='')
-    address = models.CharField(max_length=50)
-    city = models.CharField(max_length=20)
-    country = models.CharField(max_length=20)
-    payment = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.name + ' ' + self.surname
+        return self.user.username + ' ' + self.opportunity_name
 
 
 class Subscription(models.Model):
@@ -217,3 +174,106 @@ class Subscription(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class User_Profile(models.Model):
+    full_name = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=100,default='')
+    MALE = 'M'
+    FEMALE = 'F'
+    OTHER = 'O'
+    TYPE_CHOICES = [
+        (MALE, 'Male'),
+        (FEMALE, 'Female'),
+        (OTHER, 'Other'),
+    ]
+    gender = models.CharField(
+        max_length=3,
+        choices=TYPE_CHOICES,
+        default=OTHER
+    )
+    country = models.CharField(max_length=50, default='')
+    city = models.CharField(max_length=50, default='')
+    address = models.CharField(max_length=100, default='')
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default='')
+    premium_account = models.CharField(max_length=20, default='N')
+
+    def __str__(self):
+        return self.full_name
+
+class Premium_Registration(models.Model):
+    title = models.CharField(max_length=200)
+    price = models.FloatField(null=True, blank=True)
+    features = models.TextField(default='')
+
+    def __str__(self):
+        return self.title
+
+class Simple_Registration(models.Model):
+    title = models.CharField(max_length=50)
+    features = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+class AddToProfile_Scholarship(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default='')
+    scholarships = models.ForeignKey(Scholarship_Opportunitie, on_delete=models.DO_NOTHING, default='')
+
+class AddToProfile_Program(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default='')
+    programs = models.ForeignKey(Program_Opportunitie, on_delete=models.DO_NOTHING, default='')
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=50)
+    surname = models.CharField(max_length=100)
+    description = models.TextField(default='')
+    image = models.ImageField(upload_to='media')
+
+    def __str__(self):
+        return self.name + ' ' + self.surname
+
+class Booking_Date(models.Model):
+    date = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.date
+
+
+class Booking_Time(models.Model):
+    date = models.ForeignKey(Booking_Date, on_delete=models.CASCADE, null=True, blank=True)
+    time = models.CharField(max_length=100)
+    YES = 'Y'
+    NO = 'N'
+    TYPE_CHOICES = [
+        (YES, 'Yes'),
+        (NO, 'No'),
+    ]
+    available = models.CharField(
+        max_length=2,
+        choices=TYPE_CHOICES,
+        default=YES
+    )
+
+    def __str__(self):
+        return self.date.date + ' ' + self.time
+
+class Booking_Info(models.Model):
+    fullname = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    phone = models.CharField(max_length=50)
+    date = models.CharField(max_length=50)
+    time = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.fullname + ', ' + self.date + ', ' + self.time
+
+class Zoom_Link(models.Model):
+    meeting = models.CharField(max_length=50)
+    date = models.DateTimeField()
+    link = models.TextField(default='')
+
+    def __str__(self):
+        return self.meeting

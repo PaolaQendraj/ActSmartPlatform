@@ -1,0 +1,98 @@
+<!DOCType html>
+{% load static %}
+<html>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Booking</title>
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <style>
+        a#more{
+            width: 200px;
+        }
+        a#more:hover {
+            width: 215px;
+        }
+    </style>
+    <body>
+        <!-- Header Area -->
+        <header class="other">
+            {% include 'navbar.html' %}
+        </header>
+        <!-- End Of Header Area -->
+        <div class="banner booking">
+            <div class="container">
+                <div class="row">
+                    {% if date %}
+                    <form action="/booking_sent/" method="post">
+                        {% csrf_token %}
+                        <div class="panel">
+                            <div class="panel-heading"><h2>Book your appointment!</h2>
+                                <p>Book your online meeting with Act Smart mentors. In 15 minutes you will learn about worldwide opportunities, via Zoom.</p>
+                            </div>
+                            <div class="panel-body">
+                                <input class="form-control" type="text" placeholder="Full Name *" name="fullname" required>
+                                <input class="form-control" type="email" placeholder="Email Address *" name="email" required>
+                                <input class="form-control" type="text" placeholder="Phone *" name="phone" required>
+                                <div class="available">
+                                    <div class="date">
+                                        <label><i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;Select date:</label>
+                                        <select class="form-control" id="dates" name="date">
+                                            <option>Available Dates</option>
+                                            {% for d in date %}
+                                                <option value="{{ d.date }}">{{ d.date }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="time">
+                                        <label><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;Select time:</label>
+                                        <select class="form-control" id="time" name="time">
+                                            <option>Available Places</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button>Book Now</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% else %}
+                        <div class="content">
+                            <div class="panel">
+                                <div class="panel-heading"><h2><i class="fa fa-bell-o" aria-hidden="true"></i> Ups! You're late!<br></h2></div>
+                                <div class="panel-body">
+                                    <p id="text">
+                                        There will be available dates for the <b>online meetings</b> very soon!
+                                    </p>
+                                    <a id="more">Go to Homepage</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        {% include 'scripts.html' %}
+
+        <script type="text/javascript">
+            $(document).scroll(function(){
+                $('.navbar').toggleClass('scrolled', $(this).scrollTop() > $('.navbar').height());
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $("#dates").change(function() {
+                    var val = $(this).val();
+                    {% for d in date %}
+                    if (val == "{{ d.date }}") {
+                        $("#time").html("{% for t in time %}{% if t.date.date == d.date and t.available == 'Y' %}<option value='{{ t.time }}'>{{ t.time }}</option>{% endif %}{% endfor %}");
+                    }
+                    {% endfor %}
+                });
+            });
+        </script>
+
+    </body>
+</html>
+

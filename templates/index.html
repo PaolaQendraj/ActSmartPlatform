@@ -5,97 +5,163 @@
     <title>Act Smart &#9679; Home</title>
     <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
     <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
-        main .content .col2 a .wave:before{
-        content: '';
-        position: absolute;
-        top: -22px;
-        left: 0;
-        width: 100%;
-        height: 22px;
-        background: url(/ActSmart/static/images/wave.png);
-        animation: animate 0.5s linear infinite;
+        .owl-theme .owl-nav {
+            margin-top: 25px;
+        }
+        .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+            background: var(--thm-base);
+        }
+        .owl-theme .owl-dots .owl-dot span {
+            background: #41081f;
+        }
+        .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+            background: #fff;
         }
     </style>
     <body>
         <!-- Header Area -->
-        <header class="header_area">
-            {% include 'navbar.html' %}
+        <header>
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Act<span> Smart</span></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-lg-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Opportunities
+                                </a>
+                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                   <a class="dropdown-item" href="/scholarships/?id=Bachelor">Scholarships</a>
+                                   <a class="dropdown-item" href="/programs/?id=Trainings">Programs</a>
+                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/online_trainings/">Online Trainings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/booking/">Online Meetings</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/user_profile/">My Profile</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Join Us
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/register/">Register</a>
+                                        <a class="dropdown-item" href="/login/">Login</a>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </header>
         <!-- End Of Header Area -->
-        <!-- Linear Bg -->
-        <div class="linear-background">
-            <!-- Main -->
-            <main>
-                <div class="container content">
-                    <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <img src="{{ header.images.url }}" class="img-fluid">
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6 col2">
-                        <h6>{{ email_error }}</h6>
-                        <h2>{{ header.line_one }}</h2>
-                        <p>{{ header.line_two }}</p>
-                        <h6>{{ header.line_three }}</h6>
-                        <div class="box2">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <form method="post" action="/search/">
-                            {% csrf_token %}
-                            <div class="search">
-                                <input class="email-txt" type="text" name="tag" placeholder="Search here">
-                                <button class="email-btn">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </form>
-                        <div class="box">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </main>
-            <!-- End Of Main -->
-            
-            <!-- Services -->
-            <section id="services">
-                <h1>{{ services_content.line_one }}</h1>
-                <p>{{ services_content.line_two }}</p>
-                <h2>{{ services_content.line_three }}</h2>
-                <div class="container">
-                    <ul>
-                        {% for s in services %}
-                            <li>
-                                <a href="{{ s.link }}">
-                                    <div class="icon">
-                                        <i class="{{ s.icon }}"></i>
-                                    </div>
-                                </a>
-                                <div class="name">{{ s.name }}</div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="wave wave1"></div>
-                <div class="wave wave2"></div>
-                <div class="wave wave3"></div>
-                <div class="wave wave4"></div>
-            </section>
-            <!-- End Of Services -->
-        </div>
-        <!-- End Of Linear Bg -->
-        
-        <!-- Opportunities Slider -->
-        <section id="club">
+        <!-- Banner -->
+        <div class="banner index">
             <div class="container">
-                <h1>Opportunities For You</h1>
-                <div class="row">
-                    <div class="owl-carousel owl-theme">
+                <div class="content">
+                    <div class="banner-text">
+                        <h2 data-aos="fade-down" data-aos-anchor-placement="bottom-center" data-duration="500" data-aos-easing="linear" data-aos-once = "true">Act Smart Platform</h2>
+                        <h3 data-aos="zoom-out" data-duration="500" data-aos-easing="linear" data-aos-once = "true">Choose your opportunity!</h3>
+                    </div>
+                    <div class="search-opp" data-aos="fade-up" data-duration="500" data-aos-easing="linear" data-aos-once = "true">
+                        <form method="post" action="/search_opportunities/">
+                        {% csrf_token %}
+                            <select id="opportunity" name="opportunity" class="round">
+                                <option>Opportunities</option>
+                                <option value="Bachelor">Bachelor ( {{ b_sasi }} )</option>
+                                <option value="Master">Master ( {{ m_sasi }} )</option>
+                                <option value="PhD">PhD ( {{ p_sasi }} )</option>
+                                <option value="Fellowship">Fellowship ( {{ f_sasi }} )</option>
+                                <option value="Trainings">Trainings ( {{ t_sasi }} )</option>
+                                <option value="Conferences">Conferences ( {{ c_sasi }} )</option>
+                                <option value="Jobs">Jobs ( {{ j_sasi }} )</option>
+                                <option value="Internships">Internship ( {{ i_sasi }} )</option>
+                                <option value="Contests">Contests ( {{ co_sasi }} )</option>
+                                <option value="Grants">Grants ( {{ g_sasi }} )</option>
+                                <option value="Volunteering">Volunteering ( {{ v_sasi }} )</option>
+                            </select>
+                            <select id="region" name="region" class="round">
+                                <option value='any' >Region</option>
+                            </select>
+                            {% if user.is_authenticated %}
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Search</button>
+                                {% else %}
+                                <a href="/login/" class="btn btn-primary" >Search</a>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Of Banner -->
+
+
+
+        <!--Services-->
+        <section id="services">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+            <div class="wave wave4"></div>
+            <div class="service-content">
+                <div class="container">
+                    <h2  data-aos="zoom-in" data-aos-easing="linear" data-aos-once = "true">Our Services</h2>
+                    <h3 data-aos="zoom-in" data-aos-easing="linear" data-aos-once = "true">Click on an icon below to find out more.</h3>
+                    <div class="servicesBx">
+                        <div class="box box1" data-aos="fade-up" data-aos-easing="linear" data-aos-once = "true">
+                            <a href="#opportunities">
+                                <div class="icon">
+                                    <i class="{{ service1.icon }}"></i>
+                                </div>
+                            </a>
+                            <a href="#opportunities"><h4>{{ service1.name }}</h4></a>
+                        </div>
+                        <div class="box box2" data-aos="fade-up" data-aos-easing="linear" data-aos-once = "true">
+                            <a href="{{ service2.link }}">
+                                <div class="icon">
+                                    <i class="{{ service2.icon }}"></i>
+                                </div>
+                            </a>
+                            <a href="{{ service2.link }}"><h4>{{ service2.name }}</h4></a>
+                        </div>
+                        <div class="box box3" data-aos="fade-up" data-aos-easing="linear" data-aos-once = "true">
+                            <a href="{{ service3.link }}">
+                                <div class="icon">
+                                   <i class="{{ service3.icon }}"></i>
+                                </div>
+                            </a>
+                            <a data-toggle="modal" data-target="#startup" ><h4>{{ service3.name }}</h4></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Of Services-->
+
+        <!--Opportunities-->
+        <section id="opportunities">
+            <div class="container">
+                <h2 data-aos="zoom-in" data-aos-easing="linear" data-aos-once = "true">Opportunities</h2>
+                <div class="row .opp">
+                    <div class="owl-carousel owl-theme" data-aos="zoom-in-down" data-aos-easing="linear" data-aos-once = "true">
                         {% for o in opportunity %}
                             <div class="item">
                                 <div class="square">
@@ -103,7 +169,7 @@
                                     <span></span>
                                     <span></span>
                                     <div class="content">
-                                        <h2><a href="{{ o.link }}" target="_blank">{{ o.name }}</a></h2>
+                                        <h3><a href="{{ o.link }}">{{ o.name }}</a></h3>
                                     </div>
                                 </div>
                             </div>
@@ -112,20 +178,139 @@
                 </div>
             </div>
         </section>
-        <!--End Of Opportunities Slider -->
+        <!--End Of Opportunities-->
+        <div class="opportunities"></div>
+        <!--Opp Slider-->
+        <section id="opp-slider">
+            <div class="container">
+                <h2 data-aos="zoom-in" data-aos-easing="linear" data-aos-once = "true">Latest Opportunities</h2>
+                <!-- Swiper -->
+                <div class="swiper-container swiper-one" data-aos="fade-down" data-aos-easing="linear" data-aos-once = "true">
+                    <div class="swiper-wrapper">
+                        {% for s in scholarships.reverse|slice:"3" %}
+                            <div class="swiper-slide">
+                                <div class="opp">
+                                    <div class="imgBx">
+                                        <a href="/information_scholarships?id={{ s.id }}"><img src="{{ s.image_small.url }}"></a>
+                                    </div>
+                                    <div class="content-visible">
+                                        <a href="/information_scholarships?id={{ s.id }}"><h4>{{ s.title }}</h4></a>
+                                        <hr>
+                                        <h5><span>Deadline:</span> {{ s.deadline }}</h5>
+                                        <h5><span>Location:</span> {{ s.location }}</h5>
+                                    </div>
+                                    <div class="content-hidden">
+                                        <a href="/information_scholarships?id={{ s.id }}"><h3>{{ s.small_description }}</h3></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% for p in programs|slice:"2" %}
+                            <div class="swiper-slide">
+                                <div class="opp">
+                                    <div class="imgBx">
+                                        <a href="/information_scholarships?id={{ p.id }}"><img src="{{ p.image_small.url }}"></a>
+                                    </div>
+                                    <div class="content-visible">
+                                        <a href="/information_scholarships?id={{ p.id }}"><h4>{{ p.title }}</h4></a>
+                                        <hr>
+                                        <h5><span>Deadline:</span> {{ p.deadline }}</h5>
+                                        <h5><span>Location:</span> {{ p.location }}</h5>
+                                    </div>
+                                    <div class="content-hidden">
+                                        <a href="/information_scholarships?id={{ p.id }}"><h3>{{ p.small_description }}</h3></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+                <!--End Of Swiper -->
+            </div>
+        </section>
+        <!-- End Of Opp Slider -->
+
+        <!-- Testimonial -->
+        <section id="testimonial" data-aos="zoom-in" data-aos-easing="linear" data-aos-once = "true">
+            <div class="t-Box">
+             <div class="swiper-container swiper-two">
+                <div class="swiper-wrapper">
+                    {% for t in testimonial %}
+                        <div class="swiper-slide">
+                            <div class="content">
+                                <div class="data">
+                                    <div class="imgBx">
+                                        <img src="{{ t.image.url }}">
+                                    </div>
+                                    <div class="name">
+                                        <h4>{{ t.name }}</h4>
+                                        <h4>{{ t.surname }}</h4>
+                                    </div>
+                                    <a id="close"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                </div>
+                                <p>{{ t.description }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                 <!-- Add Pagination -->
+                 <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+        <!--/ Testimonial -->
 
         <!-- Modal -->
         {% include 'modal.html' %}
         <!--End Of Modal -->
 
-        <!-- Mentor -->
-        {% include 'mentor.html' %}
-        <!-- End Of Mentor -->
-        
+        <!--Start Up Modal-->
+        <div id="startup" class="modal fade in" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2><i class="fa fa-rocket" aria-hidden="true"></i> Startup Coaching</h2>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="space"></div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="text">
+                                    <h3>Write Some Text Here</h3>
+                                    <ul class="startup">
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            We offer the best opportunities for you!
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            Choose from the list the right opportunity for you!
+                                        </li>
+                                    </ul>
+                                        <form action="/subscriptions/" method="post">
+                                            {% csrf_token %}
+                                            <input type="email" name="email" placeholder="Enter Your Email" required><br>
+                                            <button id="subscribe"><i class="fa fa-envelope" aria-hidden="true"></i><span>&nbsp Call Your Mentor</span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        <!--Start Up Modal-->
+
         <!-- Footer -->
         {% include 'footer.html' %}
-
         <!--End Of Footer -->
+
+        <!-- Scripts -->
+
+        {% include 'scripts.html' %}
 
         <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js" %}"></script>
         <script type="text/javascript" src="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/owl.carousel.js" %}"></script>
@@ -138,7 +323,7 @@
                         items:1
                     },
                     550:{
-                        items:2
+                        items:3
                     },
                     768:{
                         items:3
@@ -152,13 +337,74 @@
                 }
             })
         </script>
-        {% include 'mentor_script.html' %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).scroll(function(){
+                $('.navbar').toggleClass('scrolled', $(this).scrollTop() > $('.navbar').height());
+            });
+        </script>
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper('.swiper-container.swiper-one', {
+              effect: 'coverflow',
+              grabCursor: true,
+              centeredSlides: true,
+              slidesPerView: 'auto',
+              coverflowEffect: {
+                rotate: 37,
+                stretch: 0,
+                depth: 200,
+                modifier: 1,
+                slideShadows: false,
+              },
+              pagination: {
+                el: '.swiper-pagination',
+              },
+              loop: true,
+                autoplay: {
+                  delay: 2800,
+                    disableOnInteraction: false,
+                },
+            });
+        </script>
+
+        <script>
+            var swiper = new Swiper('.swiper-container.swiper-two', {
+                grabCursor: true,
+                loop: true,
+                autoplay: {
+                  delay: 3500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        </script>
+
+         <script>
+            $(document).ready(function() {
+                $("#opportunity").change(function() {
+                    var val = $(this).val();
+                    {% for o in opportunity %}
+                    if (val == "{{ o.name }}") {
+                        $("#region").html("<option value='any'>Any Region</option>{% for c in cat_region %}{% if c.category.name == o.name %}<option value='{{ c.region }}' >{{ c.region }}</option>{% endif %}{% endfor %}");
+                    }
+                    {% endfor %}
+                });
+            });
+        </script>
+
         <script>
             $(document).ready(function() {
               $('#Register').modal('show');
             });
         </script>
+
+        <!--/ Scripts -->
+
     </body>
 </html>

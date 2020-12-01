@@ -52,7 +52,7 @@
                             </div>
                             {% if program.founded == 'Y' %}
                                 <div class="founded">
-                                    <h4>Founded:</h4>
+                                    <h4>Funded:</h4>
                                     <ul>
                                         {% for f in features %}
                                             <li> {{ f }} </li>
@@ -61,51 +61,82 @@
                                 </div>
                             {% else %}
                                 <div class="not-founded">
-                                    <h4>Not-Founded</h4>
+                                    <h4>Not-Funded</h4>
                                 </div>
                             {% endif %}
                             <div class="eligibility">
                                 <h4>Eligibility:</h4>
-                                <p>{{ program.eligibility }}</p>
+                                {% if  eligible %}
+                                    <ul id="eligible">
+                                    {% for e in  eligible %}
+                                        <li>{{ e }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p>{{ scholarship.eligibility }}</p>
+                                {% endif %}
                             </div>
                             <div class="link">
                                 <h6>For further information visit <a href="{{ program.official_link }}" target="_blank">the official link</a>.</h6>
                             </div>
+                            {% if user.is_authenticated %}
+                                <div class="save">
+                                    <h6><a href="/add_p?id={{ program.id }}"><i class="fa fa-heart" aria-hidden="true"></i></a> &nbsp;Save this opportunity.</h6>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="side-right">
+                            <div class="contact-form">
+                                <p>Need Some Extra Help?</p>
+                                <form action="/call_mentor_program/" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" value="{{ program.title }}" name="opp" style="display: none">
+                                    <h4>Do you want to enroll in this program? </h4>
+                                    <h2>Call Your Mentor Now!</h2>
+                                    <ul>
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            We offer the best opportunities for you!
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            We provide career consulting!
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            We support your ambitious ideas and dreams!
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                            Join our community!
+                                        </li>
+                                    </ul>
+                                    <button class="btn">Call Now</button>
+                                </form>
+                            </div>
+                        </div>
                         <div class="container now">
-                            <p>Flash!</p>
+                            <p>Oops!</p>
                             <h2>Trainings Happening Right Now!</h2>
                             <div class="owl-carousel owl-theme">
                                 {%  for t in training %}
                                     <div class="item">
-                                        <img src={{ t.images.url }} class="img-fluid">
-                                        <h6><a href="/trainings/" style="background-color: transparent; border:
-                                        none; padding: 0; width: 100%"><i
-                                                class="fa fa-hand-o-right"></i><span
-                                        >{{ t.name }}</span></a></h6>
+                                    <div class="img-Bx">
+                                        <a href="/trainings/"><img src={{ t.images.url }} class="img-fluid"></a>
+                                    </div>
+                                    <h6><a href="/trainings/" class="name"><i class="fa fa-hand-o-right"></i><span>{{ t.name }}</span></a></h6>
                                 </div>
                                 {% endfor %}
                             </div>
-                            <a href="/enroll/" target="_blank">
-                                <span>Enroll Now</span>
-                                <div class="wave"></div>
-                            </a>
-                            <p>Click here for more information!</p>
-                        </div>
-                        <div class="side-right">
-                            {% include 'register_form.html' %}
+                            <p><a href="/trainings/" class="more">Click here to learn more!</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Item -->
-        
-        <!-- Mentor -->
-        {% include 'mentor.html' %}
-        <!-- End Of Mentor -->
 
         <!-- Footer -->
         {% include 'footer.html' %}
@@ -130,8 +161,7 @@
                 }
             })
         </script>
-        {% include 'mentor_script.html' %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+         <!-- Scripts -->
+        {% include 'scripts.html' %}
     </body>
 </html>

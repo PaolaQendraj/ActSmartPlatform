@@ -32,6 +32,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+DEFAULT_FROM_EMAIL = 'qendraj.p@gssolutions.al'
+
 ALLOWED_HOSTS = []
 
 
@@ -133,3 +135,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'ActSmart/media')
+
+LOGIN_REDIRECT_URL = '/user_profile/'
+LOGOUT_REDIRECT_URL = '/'

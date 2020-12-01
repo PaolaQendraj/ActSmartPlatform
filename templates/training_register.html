@@ -1,0 +1,60 @@
+<!DOCType html>
+{% load static %}
+<html>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Training Registration</title>
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "OwlCarousel2-2.3.4/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" %}" rel="stylesheet" type="text/css">
+    <body>
+        <!-- Header Area -->
+        <header class="other">
+            {% include 'navbar.html' %}
+        </header>
+        <!-- End Of Header Area -->
+        <div class="banner booking">
+            <div class="container">
+                <div class="row">
+                    <form action="/training_form/" method="post">
+                        {% csrf_token %}
+                        <div class="panel">
+                            <div class="panel-heading"><h2>Training Registration</h2>
+                                <p>Save your place for the <br>"{{ training.name }}" Online Training. Enter your information below and you will hear from your coach very soon!</p>
+                            </div>
+                            <div class="panel-body">
+                                <input class="form-control" type="text" placeholder="Full Name *" name="fullname" required>
+                                <input class="form-control" type="email" placeholder="Email Address *" name="email" required>
+                                <input class="form-control" type="text" placeholder="Phone *" name="phone" required>
+                                <input type="text" placeholder="{{ training.id }}" name="t-id" value="{{ training.id }}" style="display: none">
+                                <button>Book Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        {% include 'scripts.html' %}
+
+        <script type="text/javascript">
+            $(document).scroll(function(){
+                $('.navbar').toggleClass('scrolled', $(this).scrollTop() > $('.navbar').height());
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $("#dates").change(function() {
+                    var val = $(this).val();
+                    {% for d in date %}
+                    if (val == "{{ d.date }}") {
+                        $("#time").html("{% for t in time %}{% if t.date.date == d.date and t.available == 'Y' %}<option value='{{ t.time }}'>{{ t.time }}</option>{% endif %}{% endfor %}");
+                    }
+                    {% endfor %}
+                });
+            });
+        </script>
+
+    </body>
+</html>
+
