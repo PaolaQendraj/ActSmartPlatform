@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Act Smart &#9679; Message</title>
+    <style>
+        a#more{
+            width: 75%;
+            margin-top: 15px;
+        }
+        a#more:hover{
+            width: 75%;
+            font-size: 14px;
+        }
+        h2{
+            text-align: center;
+        }
+        i{
+            color: var(--thm-accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Area -->
+        <header class="other">
+            {% include 'navbar.html' %}
+        </header>
+    <!-- End Of Header Area -->
+    <div class="banner-password">
+        <div class="content">
+            <div class="panel">
+                <div class="panel-heading"><h2><i class="fa fa-check-circle-o" aria-hidden="true"></i> Hey {{ user_profile.full_name }}!</h2></div>
+                <div class="panel-body">
+                    <p id="text">
+                        Thank you for submitting your request for a mentor. We will be in contact very soon.
+                    </p>
+                    <a id="more">Go to your profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
